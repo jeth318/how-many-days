@@ -5,6 +5,8 @@ import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { useMediaPredicate } from "react-media-hook";
 
+import Days from "./Days";
+
 import "react-day-picker/dist/style.css";
 
 import CSS from "csstype";
@@ -14,15 +16,6 @@ const wrapperStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
   minWidth: "320px",
   flexDirection: md ? "column" : "row",
   justifyContent: "center",
-});
-
-const daysBetweenStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  fontSize: md ? "30px" : "40px",
-  padding: "10px",
 });
 
 const vhrStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
@@ -41,47 +34,43 @@ export default function DayPickerWrapper() {
 
   const isMediumScreen = useMediaPredicate("(max-width: 680px)");
 
-  let footerStart = <p>Välj ett startdatum.</p>;
-  let footerEnd = <p>Välj ett slutdatum.</p>;
+  let footerStart = <h1>🦥</h1>;
+  let footerEnd = <h1>🦥</h1>;
   if (selectedStart) {
-    footerStart = <p>Du valde startdatumet {format(selectedStart, "PP")}.</p>;
+    footerStart = (
+      <div>
+        <p>Du valde startdatumet</p>
+        <p>{format(selectedStart, "PP")}</p>
+      </div>
+    );
   }
 
   if (selectedEnd) {
-    footerEnd = <p>Du valde slutdatumet {format(selectedEnd, "PP")}.</p>;
+    footerEnd = (
+      <div>
+        <p>Du valde slutdatumet</p>
+        <p>{format(selectedEnd, "PP")}</p>
+      </div>
+    );
   }
 
   const onDateSelection = function () {
     if (selectedStart && selectedEnd) {
       const msDiff = selectedEnd.getTime() - selectedStart.getTime();
-      console.log(Math.round(Math.abs(msDiff / DAY_IN_MS)));
       setDays(Math.round(Math.abs(msDiff / DAY_IN_MS)));
     }
   };
 
   useEffect(onDateSelection, [selectedStart, selectedEnd, DAY_IN_MS]);
-  const renderDays = function () {
-    if (days !== undefined) {
-      if (days === 0) {
-        return <div>👏🧠💀🧌</div>;
-      } else {
-        return <div>{days} dagar 🤌</div>;
-      }
-    }
 
-    if (!selectedStart && !selectedEnd) {
-      return <div>👇 Välj datumspann 👇</div>;
-    }
-    if (selectedStart && !selectedEnd) {
-      return <div>Välj datum till 👇</div>;
-    }
-    if (!selectedStart && selectedEnd) {
-      return <div>👇 Välj datum från</div>;
-    }
-  };
   return (
     <>
-      <div style={daysBetweenStyles(isMediumScreen)}>{renderDays()}</div>
+      <Days
+        days={days}
+        start={selectedStart}
+        end={selectedEnd}
+        isMediumScreen={isMediumScreen}
+      />
       <hr />
       <div style={wrapperStyles(isMediumScreen)}>
         <DayPicker
