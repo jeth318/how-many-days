@@ -14,7 +14,11 @@ const daysBetweenStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
   justifyContent: "center",
   alignItems: "center",
   fontSize: md ? "30px" : "40px",
-  padding: "10px",
+  padding: "15px",
+  backgroundColor: "honeydew",
+  border: "1px solid grey",
+  borderLeft: "none",
+  borderRight: "none",
 });
 
 const sunsStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
@@ -44,7 +48,7 @@ export default function Days({ days, start, end, isMediumScreen }: Props) {
       if (days === 0) {
         content = "👏🧠💀🧌";
       } else {
-        content = `${days} dagar`;
+        content = `${days} ${days > 1 ? "dagar" : "dag"}`;
       }
 
       if (!start && !end) {

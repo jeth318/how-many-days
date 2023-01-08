@@ -18,7 +18,7 @@ const wrapperStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
   justifyContent: "center",
 });
 
-const vhrStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
+const hrStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
   borderTop: md ? "3px solid grey" : "unset",
   borderLeft: md ? "unset" : "3px solid grey",
   width: md ? "auto" : "0",
@@ -71,7 +71,6 @@ export default function DayPickerWrapper() {
         end={selectedEnd}
         isMediumScreen={isMediumScreen}
       />
-      <hr />
       <div style={wrapperStyles(isMediumScreen)}>
         <DayPicker
           mode="single"
@@ -79,7 +78,7 @@ export default function DayPickerWrapper() {
           onSelect={setStartSelected}
           footer={footerStart}
         />
-        <div style={vhrStyles(isMediumScreen)}></div>
+        <hr style={hrStyles(isMediumScreen)} />
         <DayPicker
           mode="single"
           selected={selectedEnd}
