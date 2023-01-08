@@ -50,16 +50,16 @@ export default function Days({ days, start, end, isMediumScreen }: Props) {
       } else {
         content = `${days} ${days > 1 ? "dagar" : "dag"}`;
       }
+    }
 
-      if (!start && !end) {
-        content = "👇 Välj datum 👇";
-      }
-      if (start && !end) {
-        content = "Välj datum till 👇";
-      }
-      if (!start && end) {
-        content = "👇 Välj datum från";
-      }
+    if (!start && !end) {
+      content = "👇 Välj datum 👇";
+    }
+    if (start && !end) {
+      content = "Välj datum till 👇";
+    }
+    if (!start && end) {
+      content = "👇 Välj datum från";
     }
 
     return (
