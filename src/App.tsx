@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <div style={calendarStyles}>📅</div>
-      <h1 style={mainHeadingStyles}>Hur många dagar?</h1>
+      <h1 style={mainHeadingStyles}>Hur många dagar är det då?</h1>
       <h3>Välj start- och slutdatum för att se antalet dagar.</h3>
       <DayPickerWrapper />
     </div>
