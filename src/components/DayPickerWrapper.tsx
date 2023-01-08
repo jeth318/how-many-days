@@ -26,6 +26,20 @@ const hrStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
   margin: "20px",
 });
 
+const footerWrapperStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
+  display: "flex",
+  justifyContent: "center",
+});
+
+const footerStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
+  width: "auto",
+  padding: "5px",
+  margin: "30px",
+  borderRadius: "10%",
+  backgroundColor: "honeydew",
+  fontSize: "18px",
+});
+
 export default function DayPickerWrapper() {
   const DAY_IN_MS = 1000 * 3600 * 24;
   const [selectedStart, setStartSelected] = React.useState<Date>();
@@ -38,18 +52,20 @@ export default function DayPickerWrapper() {
   let footerEnd = <h1>🦥</h1>;
   if (selectedStart) {
     footerStart = (
-      <div>
-        <p>Du valde startdatumet</p>
-        <p>{format(selectedStart, "PP")}</p>
+      <div style={footerWrapperStyles(isMediumScreen)}>
+        <div style={footerStyles(isMediumScreen)}>
+          {format(selectedStart, "PP")}
+        </div>
       </div>
     );
   }
 
   if (selectedEnd) {
     footerEnd = (
-      <div>
-        <p>Du valde slutdatumet</p>
-        <p>{format(selectedEnd, "PP")}</p>
+      <div style={footerWrapperStyles(isMediumScreen)}>
+        <div style={footerStyles(isMediumScreen)}>
+          {format(selectedEnd, "PP")}
+        </div>
       </div>
     );
   }
