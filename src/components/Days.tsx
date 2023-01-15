@@ -41,7 +41,7 @@ const printDayEmojis = function (days?: number) {
 
 export default function Days({ days, start, end, isMediumScreen }: Props) {
   const renderDays = function () {
-    let content = "👇 Välj datum 👇";
+    let content = "☝️ Välj datum ☝️";
     let suns = printDayEmojis(days);
 
     if (days !== undefined) {
@@ -52,14 +52,11 @@ export default function Days({ days, start, end, isMediumScreen }: Props) {
       }
     }
 
-    if (!start && !end) {
-      content = "👇 Välj datum 👇";
-    }
     if (start && !end) {
-      content = "Välj datum till 👇";
+      content = "Välj datum till ☝️";
     }
     if (!start && end) {
-      content = "👇 Välj datum från";
+      content = "☝️ Välj datum från";
     }
 
     return (

@@ -34,9 +34,10 @@ const footerWrapperStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
 const footerStyles: (md: boolean) => CSS.Properties = (md: boolean) => ({
   width: "auto",
   padding: "5px",
-  margin: "30px",
+  marginTop: "30px",
   borderRadius: "10%",
-  backgroundColor: "honeydew",
+  backgroundColor: "#193d29",
+  color: "white",
   fontSize: "18px",
 });
 
@@ -48,13 +49,13 @@ export default function DayPickerWrapper() {
 
   const isMediumScreen = useMediaPredicate("(max-width: 680px)");
 
-  let footerStart = <h1>🦥</h1>;
-  let footerEnd = <h1>🦥</h1>;
+  let footerStart = <h1>Start</h1>;
+  let footerEnd = <h1>Slut</h1>;
   if (selectedStart) {
     footerStart = (
       <div style={footerWrapperStyles(isMediumScreen)}>
         <div style={footerStyles(isMediumScreen)}>
-          {format(selectedStart, "PP")}
+          {format(selectedStart, "PP") + " 👉"}
         </div>
       </div>
     );
@@ -64,7 +65,7 @@ export default function DayPickerWrapper() {
     footerEnd = (
       <div style={footerWrapperStyles(isMediumScreen)}>
         <div style={footerStyles(isMediumScreen)}>
-          {format(selectedEnd, "PP")}
+          {"👈 " + format(selectedEnd, "PP")}
         </div>
       </div>
     );
@@ -81,12 +82,6 @@ export default function DayPickerWrapper() {
 
   return (
     <>
-      <Days
-        days={days}
-        start={selectedStart}
-        end={selectedEnd}
-        isMediumScreen={isMediumScreen}
-      />
       <div style={wrapperStyles(isMediumScreen)}>
         <DayPicker
           mode="single"
@@ -102,6 +97,12 @@ export default function DayPickerWrapper() {
           footer={footerEnd}
         />
       </div>
+      <Days
+        days={days}
+        start={selectedStart}
+        end={selectedEnd}
+        isMediumScreen={isMediumScreen}
+      />
     </>
   );
 }
